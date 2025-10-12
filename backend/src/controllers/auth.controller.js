@@ -1,6 +1,7 @@
 import { generateToken } from '../lib/utils.js';
 import User from '../models/user.js';
 import bcrypt from 'bcryptjs';
+import {ENV} from '../lib/env.js'
 
 export const signup = async (req, res) => {
     const {fullName,email,password} = req.body;
@@ -13,6 +14,8 @@ export const signup = async (req, res) => {
         if(password.length < 6){
             return res.status(400).json({message:"Password must be of 6 characters"});
         }
+
+        //check if email valid:range
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if(!emailRegex.test(email)){
@@ -50,16 +53,21 @@ export const signup = async (req, res) => {
                 fullName: newUser.fullName,
                 email: newUser.email,
                 profilePic: newUser.profilePic,
-            })
+            });
 
             //TOdo: send welcome email to user
-        }else{
-            res.status(400).json({message:"Invalid user data"});
-        }
 
-    } catch (error) {
-        console.log("Error in signup controller",error);
-        res.status(500).json({message:"Internal Server Error"});
-        
+            
+       try {
+        await sendWelcomeEmail(savedUser.email, savedUser.fullName,ENV.CLIENT_URL);
+      } catch (error) {
+        console.error("Failed to send welcome email:", error);
+      }
+    } else {
+      res.status(400).json({ message: "Invalid user data" });
     }
+  } catch (error) {
+    console.log("Error in signup controller:", error);
+    res.status(500).json({ message: "Internal server error" });
+}
 }
