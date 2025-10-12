@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines":{
+  "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Gusainji/Chatify/issues"
   },
-  "homepage": "https://github.com/Gusainji/Chatify#readme"
+  "homepage": "https://github.com/Gusainji/Chatify#readme",
+  "dependencies": {
+    "resend": "^6.0.2"
+  }
 }
