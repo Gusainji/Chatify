@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Gusainji/Chatify#readme",
   "dependencies": {
+    "cloudinary": "^2.5.1",
     "resend": "^6.0.2"
   }
 }
