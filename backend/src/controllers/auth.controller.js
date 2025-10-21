@@ -1,14 +1,16 @@
 import { generateToken } from "../lib/utils.js";
-import User from "../models/User.js"
 import bcrypt from "bcryptjs";
 import { ENV } from "../lib/env.js";
 import { sendWelcomeEmail } from "../emails/emailHandlers.js";
 import cloudinary from "../lib/cloudinary.js";
+import User from "../models/User.js";
+
+//Just done some changes toh yha likhna pda
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
 
-  //Iam writing this so that it get update to the github
+  
   try {
     if (!fullName || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
