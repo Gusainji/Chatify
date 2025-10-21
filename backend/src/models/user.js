@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:""
     },
-},{ timestamps:true} //This is for createdAt and updatedAt
+},{ timestamps:true} //All the createdAt and updatedAt is done from here.
 );
 
 const User = mongoose.model("User",userSchema);
